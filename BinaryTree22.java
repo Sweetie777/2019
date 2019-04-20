@@ -40,6 +40,27 @@ public class BinaryTree2 {
         return list;
     }
 
+    private static void preorderNoR(TreeNode root) {
+        TreeNode cur = root;
+        Stack<TreeNode> stack = new Stack<>();
+        while (!stack.isEmpty() || cur != null) {
+            while (cur != null) {
+                System.out.println(cur.val);
+                stack.push(cur.left);
+                cur = cur.left;
+            }
+            TreeNode top = stack.pop();
+            cur = top.right;
+
+        }
+    }
+    private static void inorderNoR(TreeNode root){
+        TreeNode cur = root;
+        Stack<TreeNode> stack = new Stack<>();
+
+
+    }
+
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         if (root == null) {
@@ -60,18 +81,19 @@ public class BinaryTree2 {
 
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
-        if(root == null)
+        if (root == null)
             return list;
         Stack<TreeNode> stack = new Stack<>();
         stack.push(root);
-        while(!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             TreeNode node = stack.pop();
-            if(node.left != null) stack.push(node.left);//和传统先序遍历不一样，先将左结点入栈
-            if(node.right != null) stack.push(node.right);//后将右结点入栈
-            list.add(0,node.val);                        //逆序添加结点值
+            if (node.left != null) stack.push(node.left);//和传统先序遍历不一样，先将左结点入栈
+            if (node.right != null) stack.push(node.right);//后将右结点入栈
+            list.add(0, node.val);                        //逆序添加结点值
         }
         return list;
     }
+
     public static void main(String[] args) {
 
     }
