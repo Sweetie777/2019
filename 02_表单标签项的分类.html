@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>表单标签项的分类</title>
+<!--
+input标签 
+	type="text" 文本输入框
+	type="password"密码输入框
+	type="radio"单选按钮
+	type="checkbox"复选框
+	type="date" (h5 特效：日期组件)
+	type="email"（h5里的email组件：符合邮箱格式)
+	type="hidden":隐藏域（没有效果,但是会携带参数到后台）
+	type="file"上传文件（重点）
+	（web：文件上传：后台commos-io/commons-fileupload）
+	type="button"普通按钮（必须要指定默认值value）
+	type="rest"：重置按钮
+	type="submit"提交按钮
+
+下拉菜单select
+		option:下拉选项
+	 应用场景：省市联动
+文本域：textarea 
+	rows:文本域中指定行数
+	cols：指定行中的字符数
+按钮相关的
+button:按钮组件（h5）	
+-->
+	</head>
+<body>
+<form action="#" method="get">
+用户名：<input type="text" name="username" placeholder="请输入用户名"/><br />
+密码：<input type="password" placeholder="请输入密码"  name="pwd" />
+<input type="hidden" name="id" /><br />
+性别：
+<!--必填项：将type="radio"当做同一组信息
+	需要指定相同name属性	
+-->
+<input type="radio" value="男" name="gender"  />男
+<input type="radio" value="女" name="gender" />女
+<br />
+爱好：
+<!--必填项：将type="checkbox"当做同一组信息
+	需要指定相同name属性
+-->
+<input type="checkbox" value="足球" name="hobit" />足球
+<input type="checkbox" value="篮球球" name="hobit" />篮球
+<input type="checkbox" value="跑步"  name="hobit"/>跑步
+<br />
+出生日期：
+<input type="date" name="birth" /><br />
+联系电话：
+<input type="tel" name="phone" /><br />
+籍贯：
+<select name="jiguan">
+	<option value="请选择">-请选择-</option>
+	<option value="陕西省">陕西省</option>
+	<option value="山西省">山西省</option>
+	<option value="广东省">广东省</option>
+</select>
+<select>
+	
+</select>
+<br />
+文件上传：
+<input type="file" name="photo" /><br/>
+自我描述：
+<textarea rows="5" name="description" cols="20">
+xxxx
+</textarea><br />
+邮箱：
+<input type="email" name="email" /><br />
+<button>按钮组件</button><br />
+<input type="button" value="input的button" /><br />
+<input type="reset" value="重置"  />
+<input type="submit" value="提交" />
+
+</form>
+	
+</body>
+</html>
