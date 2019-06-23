@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>表单标签</title>
+<!--
+	
+	表单标签
+		form
+			常用属性：
+action:提交到后台url地址（http://localhost:8080/xxx）
+method：提交方式
+常用两个：get、post
+				
+				
+onsubmit（用户提交是否是成功，js去讲）
+
+get方式的特点：
+	1）提交的数据会显示在地址栏上
+			url?key1(name属性的参数值)=value1&key2=value2
+	2)提交的数据大小有限制
+	3）不适合提交私有（敏感）数据：举例密码
+			密码数据：加密
+			web：md5加密
+			EE：springSecurity：安全框架
+			
+post方式特点：
+	1）不会将用户数据提交到地址栏上
+	2）提交的数据大小没有限制
+			请求头
+			响应头
+			
+			实体参数：formData
+				username=lisi&password=123456
+	3)适合提交敏感数据	：
+			     后面(web)密码加密
+-->
+	</head>
+<body>
+	
+<form action="#" method="post">
+	<!--
+		input必填属性：name属性
+		 作用：给系统后台进行标记
+	-->
+用户名：<input type="text" name="username" /><br />
+密&nbsp;&nbsp;&nbsp;码：<input type="password" name="password" /><br />
+<input type="submit" value="提交" />
+</form>
+
+</body>
+</html>
