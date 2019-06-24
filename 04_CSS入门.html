@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>css入门</title>
+		<!--内部方式-->
+		<!--<<style>
+			
+			a{
+				color: green;	
+				font-size: 26px;
+				
+				/*文本修饰：去掉下划线*/
+				text-decoration: none;
+			}
+		</style>-->
+<!--href：链接外部css文件
+	rel：固定写法：关联层叠样式表
+-->
+<link href="css/01.css" rel="stylesheet" />
+	</head>
+<body>
+	<!--css使用方式1）行内样式
+弊端：1)行内样式一次只能控制一个标签的样式
+	2）css代码：font-size: 36px;color: red;和html标签混合使用，
+	后期不利于管理
+	
+	CSS使用方式2）：内部方式
+	在head标签中指定一个子标签：style标签：里面书写css代码
+	 style标签
+	 		  选择器{
+			  	样式；
+			  }
+			特点：1）可以一次性控制多个标签
+			 缺点：和html标签混合使用
+	     使用方式3）外部方式（实际开发中推荐方式）
+需要在css文件夹中单独书写css代码
+
+在当前页面中使用link（head标签中指定）
+		标签引入外部css文件即可
+	 	    
+	-->
+<!--<a style="font-size: 36px;color: red;" href="#">超链接1</a><br />-->
+<a href="#">超链接1</a><br />
+<a href="#">超链接2</a><br />
+<a href="#">超链接3</a><br />
+</body>
+</html>
