@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>frame</title>
+	</head>
+<!--<body>-->
+	
+	<!--注意：frameset不能和body共存-->
+<frameset rows="20%,*,10%">
+	<!--链接每个具体的页面-->
+	<frame src="head.html" />
+	<!--竖向划分-->
+	<frameset cols="15%,*">
+		<!--frame中的顺序要和cols中的顺序一致-->
+		<frame src="menu.html" />
+		<!--frame中的name属性
+			给当前frame中起名称
+		-->
+		<frame src="main.html"  name="main"/>
+	</frameset>
+	<frame src="foot.html" />
+</frameset>
+<!--</body>-->
+</html>
