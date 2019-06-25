@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>css选择器</title>
+<!--CSS选择器
+常用的三个
+	 标签选择器
+	 	标签名称{
+	 		
+	 		CSS属性：CSS属性值;
+	 	}
+	 类(class)选择器
+	   在标签中给定class属性
+	 (同一个html页面上个多个标签可以指定同名class属性)
+	   	格式：.class属性值{
+	   		CSS属性：CSS属性值;
+	   	}
+	   	
+	   	class选择器的优先级>标签选择器
+	id选择器
+		注意：1)标签中给定一个id属性
+		2)
+		在同一个html页面中，多个标签的id属性必须唯一
+		后面js：DOM编程：
+	document.getElementById("id属性值")
+	格式：
+	#id属性值{
+		css属性：css属性值;
+	}
+	id选择器优先级>class选择器>element选择器
+	
+	其他的选择器
+		并集选择器
+		 选择器1,选择器2,,,{css代码}
+		交集选择器（子元素选择器）
+		
+		选择器1 选择器2 选择..{css代码}
+		通配符选择器 ：*{css代码}
+		
+		伪类选择器(单独讲：重点)：
+			研究鼠标经过标签的4种状态
+-->
+<style>
+/*标签选择器*/
+/*div{
+	color: red;
+	font-size: 20px;
+}
+
+.ch{
+	color: #0F0;
+	font-size: 26px;
+}
+#d2{
+	color: #00F;
+	font-size: 35px;
+}*/
+
+/*并集选择器*/
+/*.ch,#d2{
+	color: #c90;
+	font-size: 30px;
+}*/
+/*.ch span{
+	color: #00F;
+	  下划线
+	text-decoration: underline;
+	font-size: 20px;
+}*/
+
+*{
+	color: #F00;
+	font-size: 20px;
+}
+
+/*交集（子元素选择器）*/
+</style>
+	</head>
+<body>
+<div class="ch">div1<span>span标签</span></div>
+<div id="d2">div2</div>
+<div>div3</div>
+<span>span标签</span>
+</body>
+</html>
