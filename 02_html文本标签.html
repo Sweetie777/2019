@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>文本标签</title>
+<!--
+	作者：offline
+	时间：2019-05-24
+	
+标题标签：h1-h6
+段落标签:p
+滚动标签：marquee
+段落缩进：blockquote :小引用  （q:大引用标签）
+地址标签：address
+上下标：sup和sub
+原样输出：pre  将内容原封不动的进行输出
+块标签：div（层级布局）
+行内标签：span
+列表标签：
+     无序列表 ul  li
+     有序列表 ol  li
+-->
+	</head>
+<body>
+<!--标题标签：h1-h6-->
+<h1>标题</h1>
+<h2>标题</h2>
+<h3>标题</h3>
+<h4>标题</h4>
+<h5>标题</h5>
+<!--<h7>标题</h7>-->
+<!--段落标签p
+	特点：有换行作用
+-->
+<p>
+第一章内容第一章内容第一章内容第一章内容第一章内容第一章内容第一章内容第一章内容
+</p>
+<p>
+第二章内容第二章内容第二章内容第二章内容第二章内容第二章内容第二章内容第二章内容
+</p>
+
+<!--段落缩进：blockquote
+	 推荐该标签引用
+-->
+<blockquote>
+	对第二章内容解释说明
+</blockquote>
+<!--滚动标签：marquee
+	常用的属性：
+	   behivour:滚动的方式
+	           alternate:来回滚动
+			   slide:滚动到一边结束
+   			   scroll:交替滚动
+   	   loop:滚动的次数
+   	   scrollamount：滚动的速度：赋整数值
+   	   direction:滚动的方向：不指定该属性默认从右到左进行滚动
+   	   背景颜色:bgcolor
+-->
+<marquee behavior="alternate" 
+	direction="right" bgcolor="pink" loop="2" scrollamount="50">
+今天天气不错</marquee>
+<!--地址标签:字体自动变成斜体-->
+陕西省西安市户县...
+
+<address>陕西省西安市户县...</address>
+<!--上下标：sup和sub-->
+数学公式:X^2<br /> <!--换行标签-->
+X<sup>2</sup> <br />
+H20  &nbsp;&nbsp;H<sub>2</sub>O
+<hr /><!--水平线	-->
+xxx公司<sup>&copy;</sup>2019-2020<br />
+<!--html中常用的转义字符
+	空格:&nbsp;
+	版权所有©:&copy;
+	注册商标 ®:&reg;
+-->
+<!--原样输出：pre  将内容原封不动的进行输出-->
+<pre>
+function checkUsername(){
+	var username = document.getelementById("id") ;
+}
+<!--列表标签：无序列表：ul
+	            type属性：指定列表项的标记类型
+	
+li-->
+<a name="list"></a>
+你的爱好？
+<ul type="square">
+	<li>足球</li>
+	<li>篮球</li>
+	<li>乒乓球</li>
+</ul>
+<hr />
+有序列表-您喜欢的明星？
+<ol type="A">
+	<li>姆吧陪</li>
+	<li>拉姆</li>
+	<li>克劳泽	</li>
+</ol>
+<!--项目组织架构列表：
+	dl dt dd
+-->
+项目组织架构列表
+<dl>
+	<dt>攻城狮</dt>
+	<dd>攻城狮1</dd>
+	<dd>攻城狮2</dd>
+	<dd>攻城狮3</dd>
+</dl>
+<!--div
+	特点：占用一行空间（有换行效果，有四个边框必须借助于Css来进行显示）
+,span-->
+<div>div1</div>
+<div>div2</div>
+<span>span1</span>
+<span>span2</span>
+</pre>
+</body>
+</html>
