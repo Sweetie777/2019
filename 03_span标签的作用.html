@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			function getUserName(){
+				//1.获取用户名的内容 ：JS dom操作
+				var username = document.getElementById("username").value ;
+				//2.获取span对象
+				var span =document.getElementById("span_id") ;
+				//3.定义规则：用户名的username如果不是”eric“，用户名可用，否则不可用
+				if(username!="eric"){
+					//设置span标签的Innerhtml属性
+					span.innerHTML="当前用户名可用".fontcolor("greenyellow") ;
+				}else{
+					span.innerHTML="当前用户名不可用".fontcolor("red") ;
+				}
+			}
+		</script>
+	</head>
+<body>
+用户名：<input type="text" id="username" onblur="getUserName()" /><span id="span_id"><span>
+</body>
+</html>
