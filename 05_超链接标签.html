@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>超链接标签</title>
+
+<!--
+a标签：
+	属性：href 指定的url资源地址（统一资源定位符）
+	    target:表示打开资源文件的一种方式 
+	         _blank
+	         _self(默认的方式)
+	         
+	   url:http://127.0.0.1:8020/Java6_html/05_%E8%B6%85%E9%93%BE%E6%8E%A5%E6%A0%87%E7%AD%BE.html?__hbt=1558700903065
+		ip:127.0.0.1      域名:localhost
+		
+		常见的协议:
+			file://本地文件协议
+				http:// :在系统盘hosts文件中查询域名对应ip
+			https://
+			mail:邮件协议
+			thunder://迅雷协议
+			jdbc:mysql://jdbc协议
+			ftp:
+			
+	超链接两个作用
+		1)跳转资源文件
+		2)作为锚链接使用
+				在同一个html页面中使用
+				 1)设置锚点(跳转标记)
+				 <a name="锚点名称"></a>
+				 2)创建跳转链接
+				 <a href="#锚点名称">执行跳转</a>
+				在不同html页面中使用
+					在另一个页面某个位置设置锚点
+					1)设置锚点(跳转标记)
+					2)从当前页面跳转到指定资源文件的文字
+					<a href="url地址#锚点名称">执行跳转</a>
+-->
+	</head>
+<body>
+<a name="top"></a><br />
+<a href="02_html文本标签.html#list">跳转指定位置</a><br />
+
+<a href="#foot"><font color="red">[跳转底部]</font></a><br />
+<a href="01_html结构.html" target="_blank">跳转</a><br />
+<a href="http://www.baidu.com">链接到百度</a><br />
+<a href="http://www.baidu.com">链接到百度</a><br />
+网站内容网站内容网站内容网站内容网站内容网站内容网站内容网站内容网站内容网站内容网站内容网站内容网站内容网站内容
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br />
+<br /><br /><br /><br />
+<!--设置锚点(跳转标记)-->
+<a name="foot"></a>
+xx公司<sup>&copy;<sup>
+<a href="#top"><font color="red">[返回顶部]</font></a>
+</body>
+</html>
