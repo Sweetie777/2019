@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>伪类选择器</title>
+<!--
+伪类：又称为（锚伪类）
+描述鼠标控制标签的状态
+
+link：鼠标没有访问过的状态
+hover:鼠标经过标签的一种状态（开发中比较多）
+active:激活状态（点击了，但是没有松开的状态）
+visited:访问过多状态:(点击后并且松开了)
+
+格式：
+		选择器：状态名称（link/hover/active/visited）{
+			
+			css样式;
+		}
+提示：在 CSS 定义中，a:hover 必须被置于 a:link 和 a:visited 之后，
+才是有效的。
+
+提示：在 CSS 定义中，a:active 必须被置于 a:hover 之后，才是有效的。
+
+提示：伪类名称对大小写不敏感。
+
+	
+-->
+<style>
+/*鼠标没有访问的状态*/
+a:link{
+	font-size: 20px;
+	color: #F00;
+	/*CSS文本修饰：*/
+	text-decoration: none;
+}
+/*访问过的状态*/
+a:visited{
+	font-size: 36px;
+	color: gray;
+	text-decoration: underline;
+}
+/*鼠标经过的状态*/
+a:hover{
+	font-size: 26px;
+	color: #00F;
+	/*添加下划线*/
+	text-decoration: underline;
+}
+
+
+/*激活状态：点击，没有松开*/
+a:active{
+	font-size: 32px;
+	color: #0F0;
+	/*去掉下划线*/
+	text-decoration: none;
+}
+
+/**
+ * 需求：一个表格，鼠标经过每一行，当前行的背景色变为蓝色：(除过表头)
+ * 		css背景属性：background-color
+ */
+
+
+</style>
+	</head>
+<body>
+<a href="01_表格.html">超链接</a>
+</body>
+</html>
