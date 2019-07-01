@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>伪类选择器和表格拆分的使用</title>
+<style>
+	/**
+ * 需求：一个表格，鼠标经过每一行，当前行的背景色变为蓝色：(除过表头)
+ * 		css背景属性：background-color
+ * 
+ */
+tbody tr:hover{
+	background-color: #00F;
+}
+
+
+/*tbody tr td:hover{
+	color: greenyellow;
+	/*单元格的属性：鼠标经过单元格：小手状态*/
+	cursor: pointer;
+	
+}*/
+</style>
+	</head>
+<body>
+<table border="1px"  align="center" width="400px" height="300px">
+	<thead>
+	<tr> 
+		<th>编号</th>
+		<th>姓名</th>
+		<th>住址</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>1</td>
+		<td>张三</td>
+		<td>西安</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>李四</td>
+		<td>咸阳</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>王五</td>
+		<td>渭南</td>
+	</tr>
+	</tbody>
+</table>
+</body>
+</html>
