@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>CSS浮动（层级布局中用到的浮动）</title>
+<style>
+
+#d1{
+	width: 200px;
+	height: 200px;
+	
+	/*显示边框*/
+	border: 2px solid #000;
+	background-color: #F00;
+	/*左浮动*/
+	float: left;
+}
+
+#d2{
+	width: 200px;
+	height: 200px;
+	
+	/*显示边框*/
+	border: 2px solid #000;
+	background-color: #0F0;
+	float: left;
+}
+
+#d3{
+	width: 200px;
+	height: 200px;
+	
+	/*显示边框*/
+	border: 2px solid #000;
+	background-color: #00F;
+	float: left;
+}
+#clear{
+	/*左右两边都不浮动*/
+	clear: both;1
+
+}
+</style>
+<!--
+	
+	浮动属性：float 
+	给某个元素设置浮动之后（left/right）,当前元素就脱离了
+	当前文档流，当前元素不占一行空间，后面的元素进行移动！
+	
+	
+	清除浮动属性：
+		clear属性：both（当前元素的左右两边没有浮动元素） ：推荐
+				left:左边元素不浮动/right:右边元素不浮动
+		
+-->
+	</head>
+<body>
+<div id="d1">div1</div>
+<!--此处添加一个div元素-->
+<!--<div id="clear"></div>-->
+<div id="d2">div2</div>
+<div id="d3">div3</div>
+</body>
+</html>
