@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Date对象</title>
+	<script>
+/*
+ * Java中日期对象:Date  java.util.Date
+ * 创建日期对象:Date date = new Date() ;Date日期格式
+ * Date日期格式---->日期文本格式"2019-6-7 HH:mm:ss"
+ * SimpleDateFormart("yyyy-MM-dd HH:mm:ss")
+ * 		format(date);日期格式化
+ * 日期文本格式"2019-6-7 HH:mm:ss"--->Date日期格式
+ * 		String s = "2019-6-7"
+ * 		parse(s) ;日期解析
+ * 
+ 网页定时器:
+经过多少毫秒重复执行这个任务
+	window.setInterval("任务()",毫秒数);
+经过多少毫秒后执行一次
+	window.setTimeout("任务()",毫秒数);
+*/
+
+
+//js中定义Date对象
+var date = new Date();
+//document.write(date) ;
+//获取年份:getFullYear() 
+//document.write(date.getYear()+"年") ;
+document.write(date.getFullYear()+"年") ;
+//获取月份:getMonth()
+document.write((date.getMonth()+1)+"月") ;
+//月份中的日期:getDate()
+document.write(date.getDate()+"日&nbsp;&nbsp;&nbsp;")
+//时
+document.write(date.getHours()+":") ;
+//分
+document.write(date.getMinutes()+":") ;
+//秒
+document.write(date.getSeconds()) ;
+	</script>
+	</head>
+<body>
+</body>
+</html>
