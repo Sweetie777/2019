@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>函数的定义</title>
+<!--
+	java定义方法:public void check(Strig username)
+js中函数定义的格式
+	function 函数名称(形式参数列表){
+		逻辑;
+	}
+	
+	函数的调用:
+	1)单独调用
+	2)赋值调用
+注意事项:
+1)在js中定义函数,函数的形式参数不能带数据类型(不能用var定义)
+2)在js中可以有return语句,采用赋值调用
+3)在js中定义同名的函数,没有方法重载的概念,后面定义的函数会将前面
+定义的函数覆盖
+4)无论形式参数个数大于还是小于实际参数个数,函数都会被调用
+	形式参数个数>实际参数个数  :NaN(没有意义的值)
+	形式参数个数<实际参数个数 :
+				会将实际参数的末尾最后一个值去除,前面的值进行运算
+5)存在默认数组:数组名称:arguments
+	作用:将实际参数赋值给形式参数
+
+
+-->
+<script>
+//定义求和函数
+//形式参数不能用var定义
+//function add(var a,var b){
+
+function add(a, b){
+	var result = a +b ;
+	document.write("结果是:"+result) ;
+	/*var result = a +b ;
+	return result ;*/
+}
+function add(a,b,c){//a=10,b=20 c=30,
+	alert(arguments.length) ;
+	for(var i = 0 ; i < arguments.length;i++){
+		alert(arguments[i]) ;
+	}
+	
+	var result = a+b+c;
+	document.write("结果是:"+result) ;
+}
+
+
+//单独调用
+add(10,20,30,40) ;
+//赋值调用
+/*var c = add(10,20) ;
+document.write("结果是:"+c)*/
+</script>
+	</head>
+	<body>
+		
+	</body>
+</html>
