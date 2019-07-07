@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>网页时钟</title>
+
+	</head>
+<body>
+	当前系统时间是:<span id="span_id"></span>
+</body>
+<script>
+function genNewDate()	{
+		//1.创建日期对象
+	var date = new Date();
+	//2.拼接当前系统时间:年-月-日 时:分:秒
+	var dateStr = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+
+	date.getDate()+"&nbsp;&nbsp;&nbsp;"+date.getHours()+":"+date.getMinutes()
+	+":"+date.getSeconds() ;
+	//3.通过id="span_id"获取span标签对象
+	var span = document.getElementById("span_id") ;
+	//4.设置span对象的innerHTML属性:输出文本:dateStr
+	//innerHTML/innerText
+	span.innerHTML = "<h2>"+dateStr+"</h2>" ;
+}
+//5.设置定时器
+window.setInterval("genNewDate()",1000) ;
+</script>
+</html>
