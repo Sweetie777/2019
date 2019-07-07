@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Array</title>
+<!--
+Array对象:
+	格式1:new Array();不指定数组长度
+	格式2:new Array(size);指定长度
+	格式3:arrayObj = new Array([element0[, element1[, ...[, elementN]]]])
+	简写方式:[元素1,元素2,....] ;
+	
+注意：
+	1)在js中定义数组，不会出现角标越界的问题
+	2)数组的长度是不断可以扩容的。。
+	3)数组中存储任意类型的元素
+	
+	
+	
+	Java中定义数组:长度固定
+			{"",""}
+			
+	java中集合List<String>
+		//可以通过反射的方式将add(Object obj)
+			{"str1","str2"}   字符串 
+			list.add("xxx") ;
+			
+			
+		
+-->
+<script>
+//格式1:new Array();不指定数组长度	
+//var arr = new Array() ;
+//格式2:new Array(size);指定长度
+//var arr = new Array(3) ;
+/*arr[0] = 10 ;
+arr[1] = "hello" ;
+arr[2] = true ;
+arr[3] = 'A';*/
+//格式3：指定具体元素
+/*var arr = [10,"hello",true,new Object(),'A',3.14,false] ;
+alert(arr.length) ;
+
+for(var i = 0 ; i < arr.length ;i++){
+	document.write(arr[i] +"&nbsp;&nbsp;");
+}*/
+
+/**
+ * 内置方法
+ * 		join（var str） :将数组中的元素通过特定str拼接成String
+ *    reverse()：数组元素进行反转
+ */
+//Array对象
+var arr = ["php","python","hadoop","Java","c"] ;
+/*strArry = arr.join("-") ;
+document.write(strArry) ;*/
+for(var i = 0 ; i <arr.length ; i++){
+	document.write(arr[i] +"&nbsp;&nbsp;") ;
+}
+document.write("<hr />") ;
+//反转
+ arr = arr.reverse() ;
+ for(var i = 0 ; i <arr.length ; i++){
+	document.write(arr[i] +"&nbsp;&nbsp;") ;
+}
+</script>
+	</head>
+<body>
+</body>
+</html>
