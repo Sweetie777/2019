@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>js内置对象之String对象</title>
+<script>
+//定义String对象
+var str1 = new String("hello") ;
+var str2 = new String("hello") ;
+document.write((str1==str2)+"<br />") ;
+//比较两个对象的内容是否相同（原始值）
+document.write((str1.valueOf()==str2.valueOf())+"<br />") ;
+
+/**
+ * 所有的表单都是String类型
+ * String类型的数据在和Number==的时候，String类型默认转换为Number类型在进行比较
+ */
+
+//定义String对象
+var str3 = "hello" ;
+var str4 = "hello" ;
+var str ="hellojava" ;
+/**
+ * String对象的常用内置方法
+ * charAt(var index):指定索引处的字符
+ * indexOf(var str):查询str在字符串中第一次出现的索引
+ * lastIndexOf(var str);
+ * fontcolor("#0F0") ;标记当前字符串的颜色
+ * substring(var start,var end):截取
+ * substr(var start,var length) :截取指定长度
+ * 
+ * split(var str):将字符串进行分割,返回字符串数组
+ */
+
+document.write("charAt:"+str.charAt(4)+"<br />");
+document.write("indexOf:"+str.indexOf("a")+"<br />");
+document.write("lastIndexOf:"+str.lastIndexOf("a")+"<br />");
+document.write("fontcolor:"+str.fontcolor("#00FF00")+"<br />");
+document.write("substring:"+str.substring(5,9)+"<br />");
+document.write("sub:"+str.substr(5,4)+"<br />");
+document.write("<br />");
+var STR = "JavaEE-Python-Php-Go-R" ;
+var STRArray  = STR.split("-") ;
+for(var i = 0 ; i <STRArray.length ; i++){
+	document.write(STRArray[i]+"<br />") ;
+}
+
+</script>
+	</head>
+<body>
+</body>
+</html>
