@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>自定义对象的使用</title>
+<script src="js/ArrayUtil.js"></script>
+<!--
+	
+	设置一个Js对象:ArrayUtil
+	提供两个方法
+	search(array,target) :查询target元素在array数组中出现的索引位置
+	max(array):在array中获取数组中的最大值
+-->
+<script>
+
+//创建数组Array
+var arr = [10,25,78,30,22] ;// var arr = new Array([xxx]) ;
+//创建ArrayUtil对象
+var au = new ArrayUtil() ;
+//调用功能
+var index = au.search(arr,30) ;
+document.write("位置是："+index+"<br />") ;
+var max = au.max(arr) ;
+document.write("最大值是："+max+"<br />") ;
+</script>
+	</head>
+	<body>
+	</body>
+</html>
