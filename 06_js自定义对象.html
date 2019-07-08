@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>js自定义对象</title>
+<script>
+/**
+ * 格式：
+ * 		定义对象和函数定义一样
+ * function 对象(属性){ 有参方式
+ * 		追加属性
+ * 		追加方法
+ * }
+ * 		
+ * 		创建对象
+ var 对象名 = new 对象(实际参数)；
+ 方式1：有参构造方法
+ */
+//定义对象
+/*function Person(name,age){
+	//追加属性
+	this.name = name ;
+	this.age =age ;
+	//追加方法
+	this.speak=function(){
+		alert("调用了说话的功能。。。") ;
+	}
+}
+//创建对象
+var p = new Person("张三",20) ;*/
+
+//方式2：无参构造
+/*function Person(){}
+//创建对象
+var p = new Person() ;
+//追加属性
+p.name="李四" ;
+p.age=25;
+//追加方法
+p.speak = function(){
+	alert("调用"+p.name+"说话的功能") ;
+}*/
+//方式3：Object对象代表所有Js内置的对象的模板
+/*var p = new Object() ;
+//追加属性
+p.name="王五" ;
+p.age=18;
+//追加方法
+p.speak = function(){
+	alert("调用"+p.name+"说话的功能") ;
+}*/
+
+//方式4(推荐)Json格式   (字面量值的方式)    
+//XML解析：DOM解析	   SAX解析 	Json解析(解析速度快，格式符合Map结构)
+//{"key1":value(任意类型),"key2":value2,...}
+var p ={
+		//追加属性
+		"name":"赵六",
+		"age" :30,
+		"speak":function(){
+			alert("调用了"+p.name+"说话的功能") ;
+		}
+	
+} ;
+
+
+//调用属性：对象名.属性名；
+//调用方法：对象名.方法名();
+document.write("姓名是:"+p.name+",年龄是："+p.age+"<br />") ; 
+p.speak() ;
+</script>
+	</head>
+<body>
+</body>
+</html>
