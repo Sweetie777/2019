@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>js原型属性</title>
+<!--
+	不通过外部的ArrayUtil自定义对象，如何给Array数组对象（内置对象）
+里面追加
+search(target) :查询target元素在array数组中出现的索引位置
+max():在array中获取数组中的最大值
+
+
+js内置对象：Array
+function Array(){
+	
+	//内置方法
+	this.join=function(){}
+	this.reverse=function(){}
+	
+	//search(target) 直接追加不可行的
+	this.search=function(target){}
+}
+
+//可以通过js原型操作
+/**
+ * 原理：如果给原型对象（Prototype）中追加额外的方法，然后再内置对象中引入原型对象
+ * 那么当前额外的方法会自动追加到内置对象中
+ * function Array(){
+ * 	//内置方法
+	this.join=function(){}
+	this.reverse=function(){}
+	
+	//通过原型属性引入原型对象
+	this.prototype=new Prototype() ;
+	
+	//额外的方法
+	this.search=function(target){}
+ * 
+ * }
+ * 
+ * function Prototype(){
+ 	* //额外的方法
+ *     	this.search=function(target){}
+ * }
+ */
+
+//简写格式：js内置对象.prototype(原型属性).追加额外的方法名=function(参数){}
+原型：
+	1)prototype属性就是给内置对象追加额外的方法使用
+	2)只要使用内置对象.原型属性.额外方法名=function(){..}
+	          可以将当前方法追加内置对象中
+	
+	
+-->
+<script>
+//给Array对象追加search（target）
+Array.prototype.search=function(target){
+	//this:
+	for(var i =0 ; i <this.length ; i++){
+		if(this[i]==target){
+			return i;
+		}
+	}
+	return -1;
+}
+
+//追加max方法
+Array.prototype.max=function(){
+	var max = this[0] ;
+	for(var i =1 ; i <this.length ; i++){
+		if(this[i]>max){
+			max = this[i] ;
+		}
+	}
+	return max ;
+}
+	
+	var arr = [10,25,78,30,22] ;
+	var index = arr.search(30) ;
+	document.write("位置是："+index+"<br />") ;
+	var max  = arr.max();
+	document.write("最大值是："+max+"<br />") ;
+</script>
+	</head>
+	<body>
+	</body>
+</html>
