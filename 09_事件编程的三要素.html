@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>事件编程</title>
+<!--
+	1)事件源:html标签
+	2)编写事件监听器:定义一个函数
+	3)注册/绑定事件监听器:使用html标签特定属性和定义的函数进行绑定
+-->
+<script>
+//编写监听器
+function btnClick(){
+	alert("触发了单击点击事件") ;
+}
+
+/**
+ * 常见事件分类
+ * 			onclick:单击点击事件
+ * 			obdbclick:双击点击事件
+ * 			onkeyup:按键抬起事件
+ *       	onfocus:获取焦点事件
+ * 			onblur:失去焦点事件
+ * 			
+ * 			onchange事件:选项卡发生变化	
+ * 					场景:省市联动
+ *          onload:页面载入事件
+ * 					一般在body指定这个属性:body中所有内容加载完毕之后触发方法
+ * 放置出现元素对象是"null"
+ */
+</script>
+	</head>
+	<body >
+		<!--button元素:事件源-->
+		<!--注册事件监听器-->
+<button onclick="btnClick()" >点击</button>
+<input type="text" value="请输入用户名" />
+<select>
+	<option>陕西省</option>
+</select>
+	</body>
+</html>
