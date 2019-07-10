@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>常见的事件分类</title>
+	<style>
+		div{
+			width: 200px;
+			height: 200px;
+			border: 1px solid #000;
+		}
+	</style>
+<script>
+	
+function testClick(){
+	alert("触发了单击点击事件") ;
+}
+function testDbClick(){
+	
+	alert("触发了双击点击事件") ;
+}
+
+function testFocus(){
+	//通过id属性值获取当前input标签对象
+	var input = document.getElementById("username") ;
+	//设置他的value属性
+	input.value = "" ;
+}
+
+function testBlur(){
+	//获取input标签对象
+	var username = document.getElementById("username") ;
+	//获取用户名的内容
+	username = username.value ;
+	
+	//获取id="user_span"的span标签对象
+	var span = document.getElementById("user_span") ;
+	
+	//如果输入的用户名不是"eric",表示用户名可用
+	if(username == "eric"){
+		//设置span的innerHTML属性
+		span.innerHTML  = "当前用户名被占用".fontcolor("red") ;
+	}else{
+		span.innerHTML  = "恭喜,用户名可用".fontcolor("greenyellow") ;
+	}
+}
+
+
+function testChange(){
+	
+	//第二种方式:定义二位数组   
+	//第三种方式:Jquery,each():Jquery的遍历
+	
+//	alert("选项卡变化了") ;
+	//通过id="province"获取省份所在的select标签对象
+	var province = document.getElementById("province");
+	//同时获取内容
+//	alert(province.value) ;
+	province = province.value ;
+	
+	//获取id="city"的select标签对象
+	var city = document.getElementById("city") ;
+	//选项卡变化,应该清楚city的innerHTML属性
+	city.innerHTML ="" ;
+	
+	//需要判断当省份所在的select选中的内容
+	if(province =="陕西省"){
+		//定义一个数组
+		var arr  = ["西安市","咸阳市","宝鸡市","渭南市"]   ;
+		//遍历城市
+		for(var i  = 0 ; i < arr.length ; i++){
+			/*<option value="西安市">西安市</option>*/
+			//设置city所在的标签对象的innerHTML属性
+			city.innerHTML +="<option value='"+arr[i]+"'>"+arr[i]+"</option>" ;
+		}
+	}
+	
+	if(province =="山西省"){
+		//定义一个数组
+		var arr  = ["太原市","大同市","运城市","晋中市"]   ;
+		//遍历城市
+		for(var i  = 0 ; i < arr.length ; i++){
+			/*<option value="西安市">西安市</option>*/
+			//设置city所在的标签对象的innerHTML属性
+			city.innerHTML +="<option value='"+arr[i]+"'>"+arr[i]+"</option>" ;
+		}
+	}
+	
+	if(province =="广东省"){
+		//定义一个数组
+		var arr  = ["深圳市","惠州市","东莞市","广州市"]   ;
+		//遍历城市
+		for(var i  = 0 ; i < arr.length ; i++){
+			/*<option value="西安市">西安市</option>*/
+			//设置city所在的标签对象的innerHTML属性
+			city.innerHTML +="<option value='"+arr[i]+"'>"+arr[i]+"</option>" ;
+		}
+	}
+}
+function testMouserOver(){
+	alert("触发了鼠标经过事件") ;
+}
+
+function testMouserOut(){
+	alert("触发了鼠标移除事件") ;
+}
+
+//网页时钟
+function init(){
+//	alert("页面载入事件") ;
+
+	//window.setInterval("newDate()",1000) ;
+}
+</script>
+	</head>
+<!--
+	onload事件:页面载入事件: 一般情况都指定在body中
+		body中内容(不管有多少个标签),将body中的加载完毕之后触发这个方法
+-->
+	<body onload="init()">
+<!--单击点击事件onclick/双击点击事件:ondbclick-->
+<input type="button" value="单击点击" onclick="testClick()" /><br />
+<input type="button" value="双击点击" ondblclick="testDbClick()" />
+
+<!--
+	和焦点相关的事件
+获取焦点: onfoucs   应用场景:文本输入框中获取焦点将默认值清空
+失去焦点: onblur    应用场景:原生js表单验证
+	
+-->
+<br />
+用户名:<input type="text" onblur="testBlur()" onfocus="testFocus()" id="username" value="请输入用户名"/>
+<!--获取到span标签,设置他的innerHTML-->
+<span id="user_span"></span>
+<br />
+
+<!--
+	下拉菜单:select    
+			onchange事件 :选项卡是否发生变化的事件
+			场景:省市联动
+	
+-->
+<select  id="province" onchange="testChange()" >
+	<option value="请选择">--请选择--</option>
+	<option value="陕西省">陕西省</option>
+	<option value="山西省">山西省</option>
+	<option value="广东省">广东省</option>
+</select>
+<select id="city">
+	<!--
+		
+		<option value="西安市">西安市</option>
+		<option value="咸阳">咸阳市</option>
+	-->
+</select>
+<br />
+<!--
+	鼠标经过事件:onmouseover/鼠标移除事件:onmouseout
+-->
+<div onmouseover="testMouserOver()" onmouseout="testMouserOut()">
+	div1
+</div>
+
+
+	</body>
+</html>
