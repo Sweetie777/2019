@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>js的常用的正则表达</title>
+<!--
+
+js的正则表达式格式:
+		var 正则对象 = /正则表达式的语法/ ;
+		内置方法:正则对象.test(表单中的信息String){
+				//成功
+			
+		}else{
+				//不成功
+		}
+常见的语法:
+	X+:X字符出现1次或多次
+	X*:X字符串出现0次或多次
+	X?:X字符串出现0次或1次
+	[a-zA-Z0-9]:匹配符合的数字或字母
+	
+	X{n,}:X字符至少出现n次
+	X{n}:X字符恰好出现n次
+	X{n,m}:X字符至少出现n次,但是不超过m次	
+	
+js弱类型语言如何要和java中的正则一样结构严谨   
+
+	必须有边界匹配符号:	(正则语法的严谨性)
+		^:表示以...开头
+		$:表示以...结尾
+-->
+<script>
+  var str = "mn12ab" ;
+  //定义正则规则
+  var reg = /^[0-9]{2}$/ ;
+  if(reg.test(str)){
+  	alert("条件成立") ;
+  }else{
+  	alert("条件不成立") ;
+  }
+</script>
+	</head>
+	<body>
+	</body>
+</html>
