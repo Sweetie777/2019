@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原生js表单验证</title>
+<!--
+	
+	定义正则规则:
+	用户名由4~14位的数字或字母组成
+	密码由6~16位的数字或字母组成
+	确认密码必须和密码内容一致
+	邮箱:数字或者字母@数字或者字母(.com/.cn/.com.cn/.....)
+-->
+<script>
+//校验用户名
+function checkUserName(){
+	//获取用户名的内容
+	var username = document.getElementById("username").value ;
+	//获取id="user_span"的标签对象,设置他的innerHTML属性提示
+	var userSpan = document.getElementById("user_span") ;
+	//规则:用户名由4~14位的数字或字母组成
+	var reg = /^[a-zA-Z0-9]{4,14}$/ ;
+	//校验
+	if(reg.test(username)){
+		//成功,提示
+		
+		userSpan.innerHTML = "用户名格式正确".fontcolor("greenyellow") ;
+		return true ;
+	}else{
+		userSpan.innerHTML = "用户名格式有误".fontcolor("red") ;
+		return false ;
+	}
+}
+
+//校验密码
+function checkPwd(){
+	//获取密码内容
+	var pwd  = document.getElementById("pwd").value ;
+	//获取span标签对象
+	var pwdSpan = document.getElementById("pwd_span") ;
+	//密码由6~16位的数字或字母组成
+	var reg  = /^[a-zA-Z0-9]{6,16}$/ ;
+	if(reg.test(pwd)){
+		pwdSpan.innerHTML = "密码格式正确".fontcolor("greenyellow") ;
+		return true ;
+	}else{
+		pwdSpan.innerHTML = "密码格式不正确".fontcolor("red") ;
+		return false ;
+	}
+}
+//确认密码
+function checkRePwd(){
+	//获取密码内容
+	var pwd  = document.getElementById("pwd").value ;
+	//获取当前内容
+	var rePwd = document.getElementById("repwd").value ;
+	//获取span对象
+	var rePwdSpan = document.getElementById("repwd_span") ;
+	//如果密码内容是数字,先自动转换为Number类型,进行比较
+	if(pwd==rePwd){
+		rePwdSpan.innerHTML = "两次输入的内容一致".fontcolor("greenyellow") ;
+		return true ;
+	}else{
+		rePwdSpan.innerHTML = "两次输入内容不一致".fontcolor("red") ;
+		return false ;
+	}
+}
+
+//校验邮箱
+function checkEmail(){
+	//获取邮箱内容
+	var email = document.getElementById("email").value ;
+	//获取span标签对象
+	var emailSpan = document.getElementById("email_span") ;
+	//邮箱:数字或者字母@数字或者字母(.com/.cn/.com.cn/.....)
+	//本身是.  --->\.    
+	//本身是\  ----->\\
+	var reg = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+(\.[a-zA-Z]{2,3}){1,2}$/ ;
+	if(reg.test(email)){
+		emailSpan.innerHTML = "邮箱格式正确".fontcolor("greenyellow") ;
+		return true ;
+	}else{
+		emailSpan.innerHTML ="邮箱格式有误,请重新输入".fontcolor("red") ;
+		return false ;
+	}
+	
+}
+
+
+
+//校验全部的内容
+function checkAll(){
+	//校验的全部内容,然后提交到后台
+	if(checkUserName() && checkPwd() && checkRePwd() &&
+	checkEmail()){
+		return true ;
+	}else{
+		return false ;
+	}
+}
+</script>
+	</head>
+
+<body>
+	<!--
+		onsumbit事件:表示表单提交是否成功
+		返回值true:成功
+		false,提交不成功
+	-->
+<form action="backend.html" method="post" onsubmit="return checkAll()">
+用户名:<input type="text" onblur="checkUserName()" id="username" /><span id="user_span"></span><br />
+密&nbsp;&nbsp;&nbsp;码:<input type="password" onblur="checkPwd()" id="pwd" /><span id="pwd_span"></span><br />
+确认密码:<input type="password" onblur="checkRePwd()" id="repwd" /><span id="repwd_span"></span><br />
+邮&nbsp;&nbsp;&nbsp;箱:<input type="text" onblur="checkEmail()" id="email" /><span id="email_span"></span><br />
+<input type="submit" value="提交" />
+</form>
+</body>
+</html>
