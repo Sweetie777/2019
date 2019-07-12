@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>DOM编程</title>
+
+<!--
+	
+	DOM:Document Object Model:
+		文档对象模型编程
+		
+	POM :项目对象模型
+-->
+<script>
+	function getUserName(){
+		//方式1:通过id属性值获取标签对象(id唯一)(推荐)
+//	var username = document.getElementById("usename") ;
+	//方式2:通过标签名称获取标签对象:返回的是列表
+//	var username = document.getElementsByTagName("input")[0] ;
+	
+	//方式3:通过name属性获取标签对象
+	//var username = document.getElementsByName("name")[0] ;
+	//方式4:通过class属性值获取标签对象(其次)
+	var username = document.getElementsByClassName("input_class")[0] ;
+	alert(username.value) ;
+	}
+	
+</script>
+	</head>
+<body>
+<!--<a href="#">超链接</a><br />
+<a href="#"></a><br />-->
+用户名:<input type="text" class="input_class" name="name" onblur="getUserName()" id="usename"  /><br />
+</body>
+
+<!--<script>
+	var aList = document.all ;//获取当前页面中所有的标签对象集合
+	alert(aList.length) ;
+	//var aList = document.links ;//返回a标签对象的列表
+	for(var i = 0 ; i <aList.length;i++){
+		document.write(aList[i].nodeName+"<br />") ;	
+	}
+	
+</script>-->
+</html>
