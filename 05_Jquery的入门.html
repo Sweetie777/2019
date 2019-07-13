@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Jq的入门</title>
+<!--
+	Jquery:丰富的js库,提供了大量api,快速去使用,操作ajax,动画,遍历,dom
+	
+	Jquery的开发步骤
+		1)导入js库
+		2)Jquery的程序入口:页面载入事件
+		3)给哪个标签派发事件(单击点击/其他事件)
+				举例:单击点击事件---完成的业务
+-->
+<!--引入核心js库-->
+<script src="js/jquery-1.11.0.js"></script>
+<script>
+	//js的页面载入事件
+	/*function init(){
+		alert("js的onload111") ;
+	}
+	
+	function init(){
+		alert("js的onload222")
+	}
+	
+	
+	//2)页面载入事件
+	//方式1:jQuery(document).ready(function(){
+		jQuery(document).ready(function(){
+			alert("jQuery(document).ready(function()") ;
+		}) ;
+	//方式2:$(document).ready(function(){})
+	$(document).ready(function(){
+			alert("$(document).ready(function()") ;
+	});
+	
+	//方式3:推荐:简写方式
+	$(function(){
+			alert("$(function()") ;
+	}) ;*/
+	
+//js的点击事件
+function testClick(){
+	alert("触发了点击事件") ;
+}
+
+//Jquery的点击事件
+$(function(){
+	
+	//确定哪个标签绑定事件
+	$("#btn1").click(function(){
+		
+		//具体的业务
+		alert("触发了Jquery的单击点击事件") ;
+	}) ;
+}) ;
+</script>
+	</head>
+<body onload="init()">
+	
+	<input type="button" value="js点击" onclick="testClick()" />
+	<br />
+	<input type="button" id="btn1" value="Jquery点击" />
+</body>
+</html>
