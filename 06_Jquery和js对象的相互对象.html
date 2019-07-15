@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Jquery和js对象的相互对象</title>
+<!--
+	1)引入js库
+-->
+<script src="js/jquery-1.11.0.js"></script>
+<script>
+function jsChange(){
+	
+	//通过id属性获取div的标签对象
+	var div = document.getElementById("div1") ;
+	//设置div标签对象的innerHTML
+	//div.innerHTML ="使用Js对象改变了div内容" ;
+	
+	//js对象--Jquery对象:将js对象使用$(js对象)
+	//在前端:变量名前面$,jquery对象
+	var $div = $(div) ;
+	$div.html("现在将js转换成Jquery对象改变div内容") ;
+}
+
+
+//页面载入事件:Jquery的程序入口
+$(function(){
+	//格式:$("#id属性值/.class属性值")
+	//给id="btn1"的input标签派发点击事件
+	$("#btn1").click(function(){
+			//改变id="div2"的div的内容
+			//$("#div2").html("使用Jquery对象改变div的内容") ;
+			
+			//直接Jquery:get(index):角标:从0开始
+			//当前第几个匹配的元素
+			var jsDiv = $("div").get(1) ;
+			jsDiv.innerHTML = "将Jquery对象转换成Js对象改变div内容" ;
+		
+	}) ;
+	
+}) ;
+
+</script>
+	</head>
+<body>
+<input type="button" onclick="jsChange()" value="js/Jq对象改变div的内容" /><br />
+<div id="div1">
+	这里的内容将被Js/Jq对象改变
+</div>
+<input type="button" id="btn1" value="jquery/js改变div的内容" /><br />
+<div id="div2">
+	这里的内容将被Jq/js对象改变
+</div>
+</body>
+</html>
