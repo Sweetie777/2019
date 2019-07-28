@@ -1,0 +1,155 @@
+SE
+	final可见性 内存屏障
+
+1.方法参数传递
+	java中只有值传递
+	
+2. String
+	字符串拼接的时候, String -> StringBuilder, 调用append方法
+	纯常量的拼接不会转为StringBuilder, 直接在常量池内找是否存在已有值
+3. 异常
+	异常体系中, 若finally中存在return, 则try, catch的语句失效
+	若finally无return, try和catch中有, 则try ,catch代码块中先暂存代码块中的值, 然后执行finally代码块, 最后返回暂存值
+4. jcl fail-fast
+
+
+数据结构
+	1. 如何在o(n)查找100w各元素中的 第10大元素: 快速排序分区思想
+	2. 如何在小于O(nlogn)时间内找到100w各元素中的前10个元素: 优先级队列
+	3. 非递归中序遍历二叉树
+	
+数据库
+	事务ACID
+	
+====================================================================================================================
+	
+一. 类集
+1. LinkedList ArrayList Vector关系与区别
+	1) 这三个类都是List接口下的常用子类, ArrayList, Vector基于数组实现, LinkedList基于双向链表实现
+	
+	2) ArrayList使用懒加载策略, 在第一次添加元素时, 初始化内部数组(大小为10)
+	扩容为原来数组的1.5倍, 
+	采用异步处理, 线程不安全,性能较高
+	
+	使用场景: 大部分时间都用的是ArrayList, 在需要尾插的时候
+	
+	3) Vector在产生对象时, 初始化大小为10的内部数组(无参构造)
+	扩容为原来数组的2倍
+	Vector采用synchronized修饰常用的增删改查方法, 线程安全, 但是性能较低(读读互斥)
+	即使是需要线程安全的时候, 也不会用它, 
+	Java提供的栈实现Stack是Vector子类
+	
+	4) LinkedList
+	使用场景: 在任意位置的插入和删除会使用
+	LinkedList是Queue的子类, (线程池也用到队列)
+	
+2. 了解jcl fail-fast策略 fail-safe
+	a. 什么是fail-fast策略 : 优先考虑出现异常的场景, 当异常产生时, 直接抛出异常, 程序终止
+	b. 为何会产生fail-fast : modCount != expectedModeCount
+		modCount存在在AbstractList, 记录List集合被修改的次数(add, remove)
+		expectedModeCount存在于内部迭代器, 存储当前集合修改次数
+	c. fail-fast的意义 : 保证多线程场景下, 不产生脏读, 
+		(当有一个线程把这个集合改了, 就会抛出异常, 告诉客户端, 这个数据不是最新的)
+
+	d. fail-safe : 不抛出ConcurrentHashMap的集合就是fail-safe集合, 
+		juc包下线程安全的集合类(CopyOnWriteArrayList, ConcurrentHashMap)
+3. set接口和map接口的关系
+	set实际上就是map, 保存的单个元素存储在map的key
+	
+	set不允许数据重复
+	HashSet判断两个对象是否重复, equals和hashCode
+	
+	元素要想保存到TreeSet中, 要么元素本身所在的类实现Comparable, 要么通过外部传入一个比较器(外部排序)
+	
+	
+4. hashCode和equals的关系
+	hashCode: 取得任意一份对象的hash码
+	equals: 比较两个对象是否相等
+	
+	hashCode返回值相等的两个对象, equals是否相等?
+		不一定相等. 参考x和f(x)的关系
+	equals返回值相等的两个对象, hashCode是否相等?
+		一定相等. 
+	
+5. java实现大小比较的方式(内部排序 外部排序)  指的是两个对象之间的比较  HashSet TreeSet
+	内部排序(自己与别人比): Comparable  
+		实现了Comparable接口的子类, 表示本类具备天然的可比较特性
+		int CompareTo(Object o)
+		>0 本身大于目标对象
+		=0 本身等于目标对象
+		<0 本身小于目标对象
+		
+	外部排序: Comparator  优先使用外部排序
+		类本身不具备可比较的特性, 专门有一个类比较该类的大小(比较器)
+		策略模式: 不影响类本身
+6. HashMap TreeMap Hashtable的关系和区别
+
+	a. 这三个类都是Map接口下的常用子类, HashTable基于哈希表实现, TreeMap基于红黑树数显
+	HashMap基于哈希表+红黑树(JDK1.8之后, 基于哈希表)
+		哈希表: (k,v)数组
+			根据相应的哈希算法计算key, 返回值即为v粗唇的数组下标
+		哈希算法: f(k) -> int即为v需要存储的数组下标
+		哈希冲突解决办法: 
+			哈希算法计算的两个不同对象的哈希值相等的情况
+			eg: 1%16 == 17%16
+		解决: 
+			开放定址法: 寻找下一个为null的数组下标, 而后将冲突元素存储
+			再散列法:再次使用一个不同的哈希算法再次计算一次
+			** 链地址法(拉链法): 将所有冲突元素按照链表存储. HashMap就采用此种方法解决哈希冲突
+	b. 关于null
+		HashMap   key和value都可以为null
+		HashTable key和value都不可以为null
+		TreeMap   只允许value为null
+	c. 线程安全比较
+		TreeMap和HashMap采用异步处理, 线程不安全, 性能较高
+		HashTable使用synchronized同步方法,线程安全, 性能较低(锁的是整个哈希表, 读读互斥)
+
+7. HashMap源码解析, 负载因子, 树化策略, 内部hash实现, resize策略
+	内部属性
+	负载因子: final float loadFactor 默认值0.75f
+	实际容量: int threshold = loadFactor * tab.length
+	树化阈值: int TREEIFY_THRESHOLD = 8
+	解除树化阈值: int UNTREEIFY_THRESHOLD = 6
+	
+	HashMap也采用了懒加载策略, 第一次put时初始化哈希表
+	树化逻辑: 索引下标对应的链表长度达到阈值8, 并且当前哈希表长度(数组长度)达到64, 才会树化, 否则只是调用resize进行哈希表的扩容
+	
+	resize(): 扩容为原来数组的2倍
+	
+	负载因子过大, 会导致哈希冲突明显增加, 但是会节省内存
+	负载因子过小, 会导致哈希表频繁扩容, 内存利用率低
+	
+	为何JDK1.8要引入红黑树?
+		当链表长度过长时, 会将哈希表查找的时间复杂度为O(n)
+		树化保证即便在哈希冲突严重时, 查找时间复杂度也为O(logn)
+		当红黑树节点个数在扩容或删除元素时减少为6以下, 在下次resize过程中会将红黑树退化为链表, 节省空间
+	
+	
+	
+	
+	
+	(h = key.hashCode()) ^ (h >>> 16)
+	为何不直接使用Object提供的hashCode?
+	
+	将哈希码保留一半, 将高低位都参与哈希运算, 减少内存开销, 减少哈希冲突
+	put内部逻辑:
+		1. 哈希表索引下标计算: i= (n-1) &hash   保证求出的索引下标都在哈希表的长度范围内
+		2. n: 哈希表的长度 要求n必须为2^n, ,保证哈希表中的所有下标都会被访问到
+			若n= 15, 则以下位置永不可能存储元素  0011, 0101, 1001, 1011, 1101, 1111      15: 00001111
+8. ConcurrentHashMap是如何高效实现线程安全的
+	Hashtable锁的是整个哈希表(锁的个数只有一个,粒度很粗,将整个表加锁, 读读互斥)
+	
+9. ConcurrentHashMap JDK1.7和1.8的区别
+
+	JDK1.7: ConcurrentHashMap Segment + 哈希表
+		Segement初始化为16之后, 不再扩容
+		扩容发生在Segment对应的小哈希表
+		ConcurrentHashMap锁的是Segment,由hashtable的一把锁增加为16个锁,锁的粒度更细
+			(支持的并发线程数增加 就是线程Segment1拿到1的锁并不会影响线程访问Segment2)
+		Segment是ReetranrLock的子类, 用Lock来保证线程安全
+		
+		
+	JDK1.8: ConcurrentHashMap 哈希表+红黑树
+		Segment没有具体作用, 只保留结构
+		ConcurrentHashMap锁的是哈希桶, 锁的粒度更加细, 锁的个数会随着哈希表的扩容而增加
+		CAS+synchronized代码块来保证线程安全性
