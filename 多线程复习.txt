@@ -1,0 +1,180 @@
+多线程
+1. Java中的多线程实现方式 : 
+	集成Thread, 
+	实现Runnable, Callable, 
+	线程池
+	
+2. 多线程的常用操作方法
+	sleep(): 线程休眠, 运行态 -> 阻塞态, 不会释放锁, 立即交出cpu
+	yield(): 线程让步, 运行态 -> 就绪态, 不会释放锁, 交出CPU时间不确定, 由系统调度
+		只会让拥有相同的优先级的线程有获取cpu的机会
+	join(): 当前线程等待另一线程执行完毕后再恢复执行, 运行态 -> 阻塞态,会释放锁
+	
+	多线程的等待与唤醒机制, 
+	wait()/notify(): synchronized  
+		要使用这两个方法的前提: 必须再同步方法和同步代码块中使用, 都会释放对象锁
+		wait() 运行态 -> 阻塞态
+		notify() 阻塞态 -> 就绪态
+		
+		Object及其子类的每个对象都有两个队列: 
+			同步队列: 获取该对象锁失败的线程进入同步队列
+			等待队列: 调用wait()的线程进入等待队列(等待被notify() )
+			
+守护线程: 
+	Java中线程分两类: 用户线程, 守护线程. 平时创建的线程默认都是用户线程, 包括主线程. 
+	守护线程: 后台线程, 只有当JVM进程中最后一个用户线程终止, 守护线程会随着JVM一同停止
+	GC线程就是典型的守护线程
+	setDeamn将用户线程置为守护线程
+
+同步(要知道保护的对象是谁, 锁是谁)	
+JVM 内存模型(JMM): 并发程序
+	描述共享变量(类成员变量, 静态变量)如何存储
+	
+	工作内存: 变量在线程中的操作(读写)必须在工作内存中进行,
+			工作内存中保存了所有变量的副本
+	主内存: 所有变量必须在主内存中存储
+	
+	原子性: 一组操作要么同时发生, 要么一个都不发生
+		基本类型的读写操作都是原子性操作
+		
+	可见性: 某一线程对于变量的修改 对于其他线程而言是立即可见的
+		synchoronized (lock), volatile ,final
+		
+	有序性: 在单线程操作场景下, 代码的执行顺序就是代码书写顺序
+		多线程场景下, 所有代码都是乱序
+	线程安全指的是以上三个特性全都同时满足
+	
+解决同步问题: 
+	1. 使用synchronized解决同步问题
+		同步代码块synchronized(对象)
+			-任意类的对象
+			-类.class
+				
+		同步方法
+			-修饰类成员方法: 锁的是当前的对象this
+			-修饰类方法(static): 锁的是当前类得反射对象
+	
+	synchronized底层实现: 对象Monitor机制
+	任意object及其子类对象内部在JVM中都附加Monitor, 获取一个对象的锁, 实际上就是获取改对象Monitor
+	当一个线程尝试获取对象Monitor时
+		1. 若此时Monitor值为0, 该对象未被任何线程获取, 当前线程获取Monitor, 将持有线程置为当前线程, Monitor值+1
+		2. 若此时Monitor值不为0, 此时该Monitor已被线程持有
+			a. 若当前线程恰好时持有线程, Monitor值再次+1, 当前线程继续进入同步块(锁的可重入性)
+			b. 若持有线程不是当前线程, 当前线程进入同步队列, 等待Monitor值减为0
+	
+	加锁: monitorenter
+	解锁: monitorexit
+	任意时刻只有当Monitor值为0的时候表示无锁状态
+	
+	2. JDK1.6后synchronized的优化问题
+		CAS: compare and swap  无锁保证线程安全
+		CAS(O,V,N)
+			v:主内存存放的实际变量值
+			o:当前线程认为的变量值
+			n:希望将变量替换的值
+		
+		线程1: ticket = 0; cas()
+		线程2: ticket = 1; cas()
+		当 O == V时, 认为此时没有线程修改变量值, 成功将n值替换回主内存
+		当 N!= O时, 此时已有线程修改变量值, 替换失败, 反hi主内存的最新值再次重试
+		
+		ABA问题:
+		
+		解决办法: 添加版本号, 知道这个值改了几次
+		
+		num = l;
+		线程1 cas(0,0,1)  1 -> 主内存   num.1
+		线程1 cas(1,1,0)  0 -> 主内存   num.2
+		线程1 cas(0,0,5)  5 -> 主内存   num.0
+		
+	偏向锁 -> 轻量级锁 -> 重量级锁(JDK1.6之前, synchronized就是重量级锁)
+	(绿灯 黄灯 红灯)
+	
+	
+		悲观锁: 认为只要我想要获取资源, 就一定有人和我抢
+		乐观锁: 认为只要我获取了这个资源, 就是我一个人的
+		
+		
+		重量级锁(悲观锁): 获取Monitor的失败的线程进入同步队列, 状态置为阻塞态
+		
+		偏向锁(乐观锁): 认为只有一个线程在来回进入同步块, 直接将加锁和解锁的过程都省略,
+					每次进入同步块之前之前, 只是判断一下同步块线程是否时当前线程
+		轻量级锁: 不同时刻有不同的线程进入同步块, 每次线程在进入同步块时都需要加锁和解锁
+		重量级锁: 同一时刻有不同线程在进入同步块
+		
+		随着竞争的不断升级, 锁也会不断升级, 锁不会降级
+		自适应自旋: 重量级锁的优化
+			获取锁失败的线程不会立即阻塞, 而是在CPU上空跑一段无用代码, 若在此时间段成功获取锁,
+			则下次再获取锁失败时, 空跑时间适当延长; 否则下次空跑时间缩短
+		
+		锁粗化
+			将多次连续的加减锁过程粗化为一次大的加锁和解锁过程, 减少无用的加减锁过程, 提高效率
+			static StringBuffer sb = new StringBuffer();
+			public static void main(String[] args) {
+				sb.append("hello");
+				sb.append("world");
+				sb.append("bit");
+			}
+			
+		锁消除
+			当变量为线程私有变量时, 将原先方法上的synchronized消除掉
+			public static void main(String[] args) {
+				StringBuffer sb = new StringBuffer();
+				sb.append("hello");
+				sb.append("world");
+				sb.append("bit");
+			}
+		
+	
+
+	3. 死锁:
+		检测是否时死锁的 先jsp -l  然后输入jstack -l
+		
+		产生死锁的四个条件:(同时满足)
+			1.互斥: 资源x在任意一个时刻只能被一个线程持有
+			2.占有且等待: 线程1占有资源x的同时等待资源y,并不释放x
+			3.不可抢占: 资源x一旦被线程1占有, 其他线程不能抢占x
+			4.循环等待:线程1持有x, 等待y, 线程2持有y, 等待x
+			
+		如何解决:
+			synchronized解决死锁: 以上四种都无法解决, 所以不能使用 
+			所以产生了lock体系
+		
+		
+	4.JDK1.5 引入lock体系 
+	a.使用格式: 
+		try{
+			//同步代码块 
+			//显式加锁
+			lock.lock();
+		}catch(Exception e){
+		
+		}finally{
+			//显式解锁
+			lock.unlock();
+		}
+	Lock是一个接口, 接口不可以直接new, 要用子类, 所以Lock lock = new ReentrantLock();
+	b.常用方法
+		lock():加锁, 与syn完全一致
+		unlock():解锁
+	
+	线程停止: stop(); 设置标记位; interrupt();
+	void lockInterruptibly() throws InterruptedException: 响应中断加锁
+	boolean tryLock(): 非阻塞式获取锁, 
+						获取锁成功返回true, 进入同步块; 
+						返回锁失败返回false, 线程继续执行其他代码
+	boolean tryLock(long time, TimeUnit unit)throws InterruptedException: 支持超时
+	
+	synchoronized和ReentrantLock的关系和区别
+		1.都属于独占锁(任意一个时刻, 只有一个线程可以获取到资源)的实现, 都支持可重入锁
+		2.synchoronized是关键字, JVM层面实现
+		  ReentrantLock是Java语言层面实现的"管程"
+		3.ReentrantLock具备一些synchronized不具备的功能
+			响应中断; 非阻塞式获取锁; 支持超时获取锁; 支持公平锁;支持多个等待队列
+			
+			公平锁: 等待时间最长的线程最先获取锁
+	
+
+	
+	Lock接口独有方式 测试(破坏死锁条件)
+	ReentrantLock可重入特性测试
